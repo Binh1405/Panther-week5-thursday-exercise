@@ -24,12 +24,10 @@ const MainPage = () => {
             <Card style={{ width: '30rem' }}>
                 <Card.Img variant="top" src={el.urlToImage}/>
                 <Card.Body>
-                <Card.Title>{el.title}</Card.Title>
-                <Card.Text>
-                    {el.description}
+                <Card.Title>Title: {el.title}</Card.Title>
+                <Card.Text> Description: {el.description}
                 </Card.Text>   
-                <Card.Text>
-                 {el.content}
+                <Card.Text> Content: {el.content}
                 </Card.Text>
                 <Card.Text>Date of publish: {el.publishedAt} </Card.Text>
                 <Card.Text>Author: {el.author} </Card.Text>
