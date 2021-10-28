@@ -3,7 +3,12 @@ import React from 'react'
 import { Container, Form, FormControl, Nav, Navbar, NavDropdown } from 'react-bootstrap'
 
 
-const NavbarNews = () => {
+const NavbarNews = ({query, setQuery}) => {
+
+ const handleOnChange =(e) =>{
+    setQuery(e.target.value)
+  }
+
     return (
         <div>
             <Navbar bg="light" expand="lg">
@@ -36,6 +41,8 @@ const NavbarNews = () => {
           placeholder="Search"
           className="me-2"
           aria-label="Search"
+          value={query}
+          onChange={handleOnChange}
         />
         <Button variant="outline-success">Search</Button>
       </Form>
