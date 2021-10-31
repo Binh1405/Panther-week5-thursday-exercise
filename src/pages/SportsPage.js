@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import MainPage from '../components/MainPage'
+import Loader from '../components/Loader'
 
 const SportsPage = () => {
     const [data, setData] = useState([])
     const [currentPage, setCurrentPage] = useState(1)
     const [totalPage, setTotalPage] = useState(1)
+    const [loading, setLoading] = useState(true)
+
     useEffect (() => {
         const getData = async () => {
             const apiKey = process.env.REACT_APP_API_KEY
@@ -15,14 +18,17 @@ const SportsPage = () => {
             setTotalPage(Math.ceil(data.totalResults/20));
             // setFilterData(data.articles)
             console.log(data)
+            setLoading(false)
         }
         getData()    
     }, [currentPage])
 
     return (
         <div>
-            <MainPage data={data} currentPage={currentPage} setCurrentPage={setCurrentPage} totalPage={totalPage} />
-        </div>
+        {
+        loading ? <Loader loading={loading} setLoading={setLoading}/> : <MainPage data={data} currentPage={currentPage} setCurrentPage={setCurrentPage} totalPage={totalPage} />
+    }
+    </div>
     )
 }
 

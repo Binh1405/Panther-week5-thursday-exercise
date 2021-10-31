@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import MainPage from '../components/MainPage'
+import Loader from '../components/Loader'
 
 const SearchPage = () => {
     const params=useParams()
@@ -8,6 +9,8 @@ const SearchPage = () => {
     const [data, setData] = useState()
     const [currentPage, setCurrentPage] = useState(1)
     const [totalPage, setTotalPage] = useState(1)
+    const [loading, setLoading] = useState(true)
+    
     console.log("search", search)
 
     useEffect(() => {
@@ -17,14 +20,16 @@ const SearchPage = () => {
             const res = await fetch(url)
             const data = await res.json()
             setData(data.articles)
+            setLoading(false)
         };
          fetchData()
     }, [search])
     return (
         <div>
-            this is search page
-        <MainPage data={data} setData={setData} currentPage={currentPage} setCurrentPage={setCurrentPage} totalPage={totalPage} setTotalPage={setTotalPage}/>
-        </div>
+        {
+        loading ? <Loader loading={loading} setLoading={setLoading}/> : <MainPage data={data} currentPage={currentPage} setCurrentPage={setCurrentPage} totalPage={totalPage} />
+    }
+    </div>
     )
 }
 
